@@ -16,6 +16,22 @@ public class CustomTree extends AbstractList<String> implements Cloneable, Seria
         return 0;
     }
 
+    static class Entry<T> implements Serializable{
+        String elementName;
+        boolean availableToAddLeftChildren, availableToAddRightChildren;
+        Entry<T> parent, leftChild, rightChild;
+
+        public Entry(String elementName) {
+            this.elementName = elementName;
+            this.availableToAddRightChildren = true;
+            this.availableToAddLeftChildren = true;
+        }
+
+        public boolean isAvailableToAddChildren() {
+            return availableToAddRightChildren || availableToAddLeftChildren;
+        }
+    }
+
     //Unsupported operations
     @Override
     public String get(int index) {
